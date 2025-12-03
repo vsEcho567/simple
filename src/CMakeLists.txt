@@ -27,8 +27,19 @@ set(SOURCE_FILES
 )
 
 OPTION(BUILD_STATIC "Option to build static lib" OFF)
-if (IOS OR BUILD_STATIC)
-# iOS only support static library.
+if (IOS)
+# iOS framework support - dynamic library
+add_library(simple SHARED ${SOURCE_FILES})
+# Create framework structure for iOS
+set_target_properties(simple PROPERTIES
+    FRAMEWORK TRUE
+    FRAMEWORK_VERSION A
+    MACOSX_FRAMEWORK_IDENTIFIER simple-tokenizer
+    VERSION 1.0.0
+    SOVERSION 1.0.0
+    PUBLIC_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/simple_tokenizer.h;${CMAKE_CURRENT_SOURCE_DIR}/pinyin.h;${CMAKE_CURRENT_SOURCE_DIR}/simple_highlight.h"
+)
+elseif (BUILD_STATIC)
 add_library(simple STATIC ${SOURCE_FILES})
 else()
 add_library(simple SHARED ${SOURCE_FILES})
