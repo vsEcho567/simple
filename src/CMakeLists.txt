@@ -38,6 +38,7 @@ set_target_properties(simple PROPERTIES
     VERSION 1.0.0
     SOVERSION 1.0.0
     PUBLIC_HEADER "${CMAKE_CURRENT_SOURCE_DIR}/simple_tokenizer.h;${CMAKE_CURRENT_SOURCE_DIR}/pinyin.h;${CMAKE_CURRENT_SOURCE_DIR}/simple_highlight.h"
+    XCODE_ATTRIBUTE_INFOPLIST_OUTPUT_FORMAT "xml"
 )
 elseif (BUILD_STATIC)
 add_library(simple STATIC ${SOURCE_FILES})
